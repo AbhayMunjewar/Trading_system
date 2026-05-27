@@ -1,30 +1,34 @@
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { RouteMetricCard } from "@/components/ui/RouteMetricCard";
+"use client";
 
-const metrics = [
-  { label: "Throughput", value: "12.5K TPS", hint: "Sustained synthetic trade traffic across the benchmark window." },
-  { label: "Latency", value: "p99 15.8ms", hint: "Tail latency stays in range under burst load." },
-  { label: "Recovery", value: "99.4%", hint: "Mock stream resumes after node churn in the simulation." },
-];
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { StaggerFade } from "@/components/dashboard/motion/StaggerFade";
+import { TpsLatencyCharts } from "@/components/dashboard/charts/TpsLatencyCharts";
+import { DashboardStats } from "@/components/dashboard/dashboardCards/DashboardStats";
+import { ActiveContainersPanel } from "@/components/dashboard/realtime/ActiveContainersPanel";
+import { WebsocketSimulationLog } from "@/components/dashboard/realtime/WebsocketSimulationLog";
 
 export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <SectionHeader
         eyebrow="Dashboard"
-        title="Live benchmark telemetry"
-        description="Operational overview for the simulated exchange: throughput, latency, queue depth, and stream health at a glance."
+        title="Futuristic realtime trading telemetry"
+        description="Live mock websocket stream powering TPS + latency, bot fleet activity, and container/ops signals."
       />
 
-      <div className="grid gap-4 md:grid-cols-3">
-        {metrics.map((metric) => (
-          <RouteMetricCard key={metric.label} {...metric} />
-        ))}
-      </div>
+      <StaggerFade>
+        <TpsLatencyCharts />
+      </StaggerFade>
 
-      <div className="rounded-3xl border border-white/10 bg-black/20 p-6 text-sm text-cyber-100/70 backdrop-blur-md shadow-neon-soft">
-        This route exists to remove the 404 from the sidebar navigation and give the HMR overlay a valid destination.
+      <StaggerFade delay={0.12}>
+        <DashboardStats />
+      </StaggerFade>
+
+      <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+        <ActiveContainersPanel />
+        <WebsocketSimulationLog />
       </div>
     </div>
   );
 }
+

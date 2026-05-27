@@ -42,7 +42,7 @@ export function AppShell({ children }: PropsWithChildren) {
           : "text-lime-400";
 
   return (
-    <div className="relative min-h-dvh bg-black text-cyber-100 overflow-hidden">
+    <div className="relative min-h-dvh bg-black text-cyber-100 overflow-y-auto overflow-x-hidden">
       <NeonBackground />
 
       {/* Top bar */}
